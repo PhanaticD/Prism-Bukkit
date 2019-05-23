@@ -37,7 +37,7 @@ public class PrismConfig extends ConfigBase {
 		config.addDefault("prism.allow-metrics", true);
 
 		// Database
-		PrismDatabaseFactory.createDefaultConfig(config);
+		//PrismDatabaseFactory.createDefaultConfig(config);
 
 		// pste.me sharing.
 		config.addDefault("prism.paste.enable", false);

@@ -12,11 +12,12 @@
 	</developers>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<dir>${project.build.directory}</dir>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
+			<groupId>com.destroystokyo.paper</groupId>
+			<artifactId>paper-api</artifactId>
 			<version>1.13.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
@@ -64,8 +65,13 @@
             <id>CodeMC</id>
             <url>https://repo.codemc.org/repository/maven-public</url>
 		</repository>
+		<repository>
+			<id>papermc</id>
+			<url>https://papermc.io/repo/repository/maven-public/</url>
+		</repository>
 	</repositories>
 	<build>
+		<defaultGoal>clean package install</defaultGoal>
 	<resources>
 		<resource>
 			<directory>src/main/resources</directory>
@@ -98,7 +104,7 @@
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-shade-plugin</artifactId>
 			<version>2.3</version>
-			<configuration>
+			<!--<configuration>
 				<relocations>
 					<relocation>
 						<pattern>org.apache.tomcat.jdbc</pattern>
@@ -114,17 +120,19 @@
                     </relocation>
                     <relocation>
                         <pattern>org.bstats</pattern>
-                        <!-- Replace this with your package! -->
                         <shadedPattern>com.botsko.prism.libs.bstats</shadedPattern>
                     </relocation>
 				</relocations>
-			</configuration>
+			</configuration>-->
 			<executions>
 				<execution>
 					<phase>package</phase>
 					<goals>
 						<goal>shade</goal>
 					</goals>
+					<configuration>
+						<minimizeJar>true</minimizeJar>
+					</configuration>
 				</execution>
 			</executions>
 		</plugin>
@@ -132,6 +140,14 @@
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-dependency-plugin</artifactId>
 			<version>3.1.1</version>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<version>3.1.1</version>
+			<configuration>
+				<outputDirectory>${dir}</outputDirectory>
+			</configuration>
 		</plugin>
 	</plugins>
 	</build>

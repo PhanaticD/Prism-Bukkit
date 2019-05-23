@@ -377,6 +377,7 @@ public class RecordingTask implements Runnable {
 			}
 			else {
 				conn.commit();
+				conn.setAutoCommit(true);
 			}
 
 		}

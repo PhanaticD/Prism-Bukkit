@@ -1,5 +1,6 @@
 package me.botsko.prism.actions;
 
+import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.QueryParameters;
 import me.botsko.prism.appliers.ChangeResult;
 import me.botsko.prism.appliers.ChangeResultType;
@@ -111,8 +112,10 @@ public class HangingItemAction extends GenericAction {
 
 		final BlockFace attachedFace = getDirection();
 
-		final Location loc = getLoc().getBlock().getRelative(getDirection())
-				.getLocation();
+		System.out.println("Oweeeeeeee");
+		System.out.println(getLoc().getBlock().getRelative(getDirection()).getLocation().getBlock());
+		System.out.println(getDirection());
+		final Location loc = getLoc().getBlock().getRelative(getDirection()).getLocation();
 
 		// Ensure there's a block at this location that accepts an attachment
 		if (BlockUtils.materialMeansBlockDetachment(loc.getBlock().getType())) {
@@ -121,8 +124,8 @@ public class HangingItemAction extends GenericAction {
 
 		try {
 			if (getHangingType().equals("item_frame")) {
-				final Hanging hangingItem = getWorld().spawn(loc, ItemFrame.class);
-				hangingItem.setFacingDirection(attachedFace, true);
+				final Hanging hangingItem = getWorld().spawn(getLoc(), ItemFrame.class);
+				hangingItem.setFacingDirection(attachedFace.getOppositeFace(), true);
 				return new ChangeResult(ChangeResultType.APPLIED, null);
 			}
 			else if (getHangingType().equals("painting")) {

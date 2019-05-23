@@ -43,7 +43,7 @@ public class PrismDatabaseFactory {
     }
     public static PrismDataSource createDataSource(Configuration  configuration) {
         if(configuration == null) return null;
-        String dataSource = configuration.getString("dataSource","mysql");
+        String dataSource = configuration.getString("datasource","mysql");
         if(dataSource == null)return null;
         switch (dataSource) {
             case "mysql":
