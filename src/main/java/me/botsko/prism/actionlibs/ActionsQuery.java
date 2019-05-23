@@ -520,7 +520,11 @@ public class ActionsQuery {
 			if (conn != null && !conn.isClosed()) {
 				s = conn.createStatement();
 				ResultSet set  = s.executeQuery(query);
-				result = set.getInt(1);
+				if(set.next()) {
+					result = set.getInt(1);
+				} else {
+					return 0;
+				}
 			}
 			else {
 				Prism.log("Prism database error. Purge cannot continue.");
@@ -564,7 +568,11 @@ public class ActionsQuery {
 			if (conn != null && !conn.isClosed()) {
 				s = conn.createStatement();
 				ResultSet set  = s.executeQuery(query);
-				result = set.getInt(1);
+				if(set.next()) {
+					result = set.getInt(1);
+				} else {
+					return 0;
+				}
 			}
 			else {
 				Prism.log("Prism database error. Purge cannot continue.");

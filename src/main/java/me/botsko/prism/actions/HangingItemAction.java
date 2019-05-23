@@ -109,10 +109,7 @@ public class HangingItemAction extends GenericAction {
 			return new ChangeResult(ChangeResultType.SKIPPED, null);
 		}
 
-		final BlockFace attachedFace = getDirection();
-
-		final Location loc = getLoc().getBlock().getRelative(getDirection())
-				.getLocation();
+		final Location loc = getLoc().getBlock().getRelative(getDirection()).getLocation();
 
 		// Ensure there's a block at this location that accepts an attachment
 		if (BlockUtils.materialMeansBlockDetachment(loc.getBlock().getType())) {
@@ -121,13 +118,13 @@ public class HangingItemAction extends GenericAction {
 
 		try {
 			if (getHangingType().equals("item_frame")) {
-				final Hanging hangingItem = getWorld().spawn(loc, ItemFrame.class);
-				hangingItem.setFacingDirection(attachedFace, true);
+				final Hanging hangingItem = getWorld().spawn(getLoc(), ItemFrame.class);
+				hangingItem.setFacingDirection(getDirection().getOppositeFace(), true);
 				return new ChangeResult(ChangeResultType.APPLIED, null);
 			}
 			else if (getHangingType().equals("painting")) {
-				final Hanging hangingItem = getWorld().spawn(loc, Painting.class);
-				hangingItem.setFacingDirection(getDirection(), true);
+				final Hanging hangingItem = getWorld().spawn(getLoc(), Painting.class);
+				hangingItem.setFacingDirection(getDirection().getOppositeFace(), true);
 				return new ChangeResult(ChangeResultType.APPLIED, null);
 			}
 		}

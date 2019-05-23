@@ -376,7 +376,7 @@ public class RecordingTask implements Runnable {
 						"Prism database error. We have to bail in the middle of building extra data bulk insert query.");
 			}
 			else {
-				conn.commit();
+				conn.setAutoCommit(true);
 			}
 
 		}
